@@ -5,24 +5,26 @@ import Image from 'next/image';
 import { IF } from '../Conditional';
 import Terminal from './Terminal';
 const Gallery = () => {
-	const [popUp, setPopUp] = React.useState<boolean>(false);
+	const [popUp, setPopUp] = React.useState<boolean>(true);
 	function popUpModal() {
 		setPopUp((prev) => !prev);
 	}
 	return (
-		<section className='h-screen max-h-screen w-screen flex items-center justify-center relative gap-4'>
+		<section className='h-screen max-h-screen w-screen relative flex flex-row justify-center flex-wrap lg:flex-row p-2 gap-4'>
 			{Array.from({ length: 5 }).map((_, index) => (
 				<div
 					onClick={popUpModal}
 					key={index}
-					className='flex items-center justify-center flex-col capitalize'>
+					className='flex flex-col capitalize'>
 					<Image
 						src={'/folder.png'}
 						alt='folder'
 						width={150}
 						height={150}
 					/>
-					<span>veneu</span>
+					<span className='text-center font-mono text-xs'>
+						bangli skatepark
+					</span>
 				</div>
 			))}
 			<IF
