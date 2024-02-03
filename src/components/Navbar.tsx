@@ -23,7 +23,10 @@ const Navbar = () => {
 				<Line />
 				<h1>location</h1>
 			</div>
-			<div className='h-10 rounded-full border border-solid border-black bg-[#f2f2f2] lg:hidden flex items-center justify-center'>
+			<div className='h-10 rounded-full border border-solid border-black bg-[#f2f2f2] lg:hidden flex items-center justify-between p-5'>
+				<h1 className='text-xs font-mono font-bold'>
+					archive//bangli--skatepark
+				</h1>
 				<Hamburger />
 			</div>
 		</header>

@@ -1,9 +1,7 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import Terminal from '../../../app/test/Terminal';
 import { IF } from '../../Conditional';
-import Draggable from 'react-draggable';
 import Marquee from 'react-fast-marquee';
 import Window from './Window';
 const Finder = ({ index }: { index: number }) => {
@@ -11,18 +9,19 @@ const Finder = ({ index }: { index: number }) => {
 	const nodeRef = React.useRef<HTMLDivElement>(null);
 	function handleClose() {
 		setOpen((prev) => !prev);
+		console.info('close');
 	}
 	return (
 		<React.Fragment>
 			<div
 				onClick={handleClose}
-				className='flex flex-col capitalize cursor-pointer'>
+				className='flex flex-col capitalize cursor-pointer hover:bg-[#e3e2e2] hover:rounded-md p-1'>
 				<Image
 					src={'/folder.png'}
 					alt='folder'
 					width={150}
 					height={150}
-					className='hover:bg-[#e3e2e2] hover:rounded-md px-2'
+					className='px-2'
 				/>
 				<span className='text-center font-mono text-xs'>
 					archive/22
@@ -34,7 +33,7 @@ const Finder = ({ index }: { index: number }) => {
 				<Window
 					headerText={`@Archive//bangli--skatepark__${index + 1}`}
 					handleClose={handleClose}
-					classNames='w-[80%] h-[50%] lg:w-1/2 lg:h-[65%] top-1/2 left-1/2 z-[60] -translate-x-1/2 -translate-y-1/2 shadow-md bg-white rounded-md fixed flex flex-col'>
+					classNames='w-[80%] h-[50%] lg:w-1/2 lg:h-[65%] top-1/2 left-1/2 z-[60] -translate-x-1/2 -translate-y-1/2 shadow-md bg-white rounded-md fixed flex flex-col border border-solid border-[#C8C8C8]'>
 					<Marquee
 						className='p-2 h-fit uppercase font-mono text-6xl bg-black text-white'
 						autoFill={true}>

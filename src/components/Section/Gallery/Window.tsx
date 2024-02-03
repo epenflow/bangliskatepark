@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { IF } from '../../Conditional';
 import { createPortal } from 'react-dom';
@@ -140,21 +141,22 @@ const Window = ({
 	) as HTMLDivElement;
 	function handleMaximize() {
 		setMaximize((prev) => !prev);
+		console.info('maximize');
 	}
 	function handleMinimize() {
 		setMinimize((prev) => !prev);
+		console.info('minimize');
 	}
 	const headerVariants = {
 		default: {
 			parentClass:
-				'w-full p-2 relative bg-[#f5f5f5] rounded-t-md flex items-center',
-			ulClass:
-				'flex flex-row gap-1 absolute items-center bg-[#f5f5f5] p-2',
+				'w-full p-1 relative bg-[#f5f5f5] rounded-t-md flex items-center border-b border-solid border-[#C8C8C8]',
+			ulClass: 'flex flex-row gap-1 absolute items-center bg-[#f5f5f5]',
 		},
 		minimize: {
 			parentClass:
-				'flex flex-row gap-1 items-center p-2 bg-[#f5f5f5] shadow-md rounded-md',
-			ulClass: 'flex flex-row gap-1 bg-[#f5f5f5] p-2',
+				'flex flex-row gap-1 items-center p-2 bg-[#f5f5f5] shadow-md rounded-md border border-solid border-[#C8C8C8]',
+			ulClass: 'flex flex-row gap-1 bg-[#f5f5f5] p-1',
 		},
 	};
 	return (
@@ -163,8 +165,8 @@ const Window = ({
 			elseCondition={createPortal(
 				<WindowHeader
 					handleClose={handleClose}
-					handleMaximize={handleMaximize}
-					handleMinimize={handleMinimize}
+					handleMaximize={handleMinimize}
+					handleMinimize={handleMaximize}
 					text={headerText}
 					variant={headerVariants.minimize}
 				/>,
