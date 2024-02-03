@@ -1,37 +1,28 @@
 'use client';
 import React from 'react';
-import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
-import Image from 'next/image';
-import { IF } from '../Conditional';
-import Terminal from './Terminal';
+import Finder from '@/components/Section/Gallery/Finder';
+import Draggable from 'react-draggable';
+
 const Gallery = () => {
-	const [popUp, setPopUp] = React.useState<boolean>(true);
-	function popUpModal() {
-		setPopUp((prev) => !prev);
-	}
 	return (
-		<section className='h-screen max-h-screen w-screen relative flex flex-row justify-center flex-wrap lg:flex-row p-2 gap-4'>
-			{Array.from({ length: 5 }).map((_, index) => (
-				<div
-					onClick={popUpModal}
-					key={index}
-					className='flex flex-col capitalize'>
-					<Image
-						src={'/folder.png'}
-						alt='folder'
-						width={150}
-						height={150}
+		<section className='h-screen max-h-screen w-screen relative overflow-hidden flex flex-row justify-center flex-wrap lg:flex-row p-2 gap-4'>
+			<div
+				className='flex flex-row w-full flex-wrap justify-center content-start lg:justify-start'
+				id='dekstop__items'>
+				{Array.from({ length: 4 }).map((_, index) => (
+					<Finder
+						key={index}
+						index={index}
 					/>
-					<span className='text-center font-mono text-xs'>
-						bangli skatepark
-					</span>
-				</div>
-			))}
-			<IF
-				state={popUp}
-				elseCondition={null}>
-				<Terminal popUpModal={popUpModal} />
-			</IF>
+				))}
+			</div>
+			<div
+				id='program__window'
+				className='absolute top-0 left-0 flex'>
+				<div
+					className='fixed right-5 bottom-5 flex flex-col gap-y-1 z-[60]'
+					id='minimized__window'></div>
+			</div>
 		</section>
 	);
 };

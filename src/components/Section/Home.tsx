@@ -28,7 +28,7 @@ const Home = () => {
 					-8.462643, 115.353366
 				</Link>
 				<div className='absolute top-0 '>
-					<HomeMarquee direction='right' />L
+					<HomeMarquee direction='right' />
 				</div>
 			</div>
 			<div className='flex flex-col h-full w-full lg:w-1/2 items-center justify-center border-l border-solid border-black gap-2 box-border overflow-hidden relative'>
