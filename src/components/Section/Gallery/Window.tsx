@@ -2,6 +2,7 @@
 import React from 'react';
 import { IF } from '../../Conditional';
 import { createPortal } from 'react-dom';
+import { useIsomorphicEffect } from '@/lib/hooks/useIsomorphicEffect';
 type HeaderButton = {
 	handleClose: () => void;
 	handleMinimize: () => void;
@@ -11,14 +12,14 @@ type DefaultType = {
 	children: React.ReactNode;
 	styles?: React.CSSProperties;
 	classNames?: string;
+	wrapperId?: string;
+	contentId?: string;
 };
 type variant = {
 	parentClass: string;
 	ulClass: string;
 };
-interface WindowContent {
-	children: React.ReactNode;
-}
+interface WindowContent extends DefaultType {}
 interface WindowHeader extends HeaderButton {
 	text?: string;
 	variant: variant;
@@ -26,6 +27,8 @@ interface WindowHeader extends HeaderButton {
 interface Window extends DefaultType {
 	handleClose: () => void;
 	headerText: string;
+	contentClassName?: string;
+	contentStyles?: React.CSSProperties;
 }
 interface WindowWrapper extends DefaultType {
 	maximize: boolean;
@@ -78,10 +81,21 @@ export const WindowHeader = ({
 	return <Maximize />;
 };
 
-export const WindowContent = ({ children }: WindowContent) => {
+export const WindowContent = ({
+	children,
+	classNames,
+	styles,
+	contentId,
+}: WindowContent) => {
 	return (
 		<div
-			className={`p-2 lg:p-4 w-full overflow-y-scroll h-full no-scrollbar`}>
+			id={contentId}
+			className={`${
+				classNames
+					? classNames
+					: 'p-2 lg:p-4 w-full overflow-y-scroll h-full no-scrollbar'
+			}`}
+			style={styles}>
 			{children}
 		</div>
 	);
@@ -92,6 +106,7 @@ const WindowWrapper = ({
 	classNames,
 	styles,
 	maximize,
+	wrapperId,
 }: WindowWrapper) => {
 	React.useEffect(() => {
 		if (maximize) {
@@ -106,15 +121,18 @@ const WindowWrapper = ({
 			state={maximize}
 			elseCondition={
 				<div
+					id={wrapperId}
 					className={classNames}
 					style={styles}>
 					{children}
 				</div>
 			}>
-			<div className='fixed top-0 left-0 w-screen h-screen bg-[#39FF14] flex items-center justify-center z-[60]'>
+			<div
+				id={wrapperId}
+				className='fixed top-0 left-0 w-screen h-screen bg-[#00ff00] flex items-center justify-center z-[100]'>
 				<div
 					className={
-						'w-[85%] h-[90%] bg-white rounded-md shadow-md flex flex-col'
+						'w-[85%] h-[90%] bg-white rounded-md shadow-md overflow-hidden relative flex flex-col border border-solid border-[#C8C8C8]'
 					}
 					style={styles}>
 					{children}
@@ -129,16 +147,23 @@ const Window = ({
 	styles,
 	handleClose,
 	headerText,
+	contentClassName,
+	contentStyles,
+	wrapperId,
+	contentId,
 }: Window) => {
 	const [minimize, setMinimize] = React.useState<boolean>(false);
 	const [maximize, setMaximize] = React.useState<boolean>(false);
-
+	const [domReady, setDomReady] = React.useState<boolean>(false);
 	const programWindow = document.querySelector(
 		'#program__window'
 	) as HTMLDivElement;
 	const minimizedWindow = document.querySelector(
 		'#minimized__window'
 	) as HTMLDivElement;
+	useIsomorphicEffect(() => {
+		setDomReady(true);
+	}, []);
 	function handleMaximize() {
 		setMaximize((prev) => !prev);
 		console.info('maximize');
@@ -150,44 +175,56 @@ const Window = ({
 	const headerVariants = {
 		default: {
 			parentClass:
-				'w-full p-1 relative bg-[#f5f5f5] rounded-t-md flex items-center border-b border-solid border-[#C8C8C8]',
+				'w-full p-1 relative bg-[#f5f5f5] rounded-t-md flex items-center border-b border-solid border-[#C8C8C8] z-20',
 			ulClass: 'flex flex-row gap-1 absolute items-center bg-[#f5f5f5]',
 		},
 		minimize: {
 			parentClass:
-				'flex flex-row gap-1 items-center p-2 bg-[#f5f5f5] shadow-md rounded-md border border-solid border-[#C8C8C8]',
+				'flex flex-row gap-1 items-center p-2 bg-[#f5f5f5] shadow-md rounded-md border border-solid border-[#C8C8C8] z-20',
 			ulClass: 'flex flex-row gap-1 bg-[#f5f5f5] p-1',
 		},
 	};
 	return (
 		<IF
 			state={!minimize}
-			elseCondition={createPortal(
-				<WindowHeader
-					handleClose={handleClose}
-					handleMaximize={handleMinimize}
-					handleMinimize={handleMaximize}
-					text={headerText}
-					variant={headerVariants.minimize}
-				/>,
-				minimizedWindow
-			)}>
-			{createPortal(
-				<WindowWrapper
-					maximize={maximize}
-					classNames={classNames}
-					styles={styles}>
-					<WindowHeader
-						handleClose={handleClose}
-						handleMaximize={handleMaximize}
-						handleMinimize={handleMinimize}
-						text={headerText}
-						variant={headerVariants.default}
-					/>
-					<WindowContent>{children}</WindowContent>
-				</WindowWrapper>,
-				programWindow
-			)}
+			elseCondition={
+				domReady
+					? createPortal(
+							<WindowHeader
+								handleClose={handleClose}
+								handleMaximize={handleMinimize}
+								handleMinimize={handleMaximize}
+								text={headerText}
+								variant={headerVariants.minimize}
+							/>,
+							minimizedWindow
+					  )
+					: null
+			}>
+			{domReady
+				? createPortal(
+						<WindowWrapper
+							maximize={maximize}
+							classNames={classNames}
+							styles={styles}
+							wrapperId={wrapperId}>
+							<WindowHeader
+								handleClose={handleClose}
+								handleMaximize={handleMaximize}
+								handleMinimize={handleMinimize}
+								text={headerText}
+								variant={headerVariants.default}
+							/>
+							<WindowContent
+								classNames={contentClassName}
+								styles={contentStyles}
+								contentId={contentId}>
+								{children}
+							</WindowContent>
+						</WindowWrapper>,
+						programWindow
+				  )
+				: null}
 		</IF>
 	);
 };

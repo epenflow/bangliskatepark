@@ -2,7 +2,6 @@ import React from 'react';
 import Each from '../Each';
 
 const Thanks = () => {
-	const arr = Array.from({ length: 10 });
 	return (
 		<section className='w-screen max-h-screen h-screen capitalize overflow-hidden'>
 			<h1 className='lg:text-8xl text-4xl text-center'>

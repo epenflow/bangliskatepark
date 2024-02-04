@@ -41,13 +41,12 @@ const Navbar = () => {
 	const [isToggle, setToggle] = React.useState<boolean>(false);
 	const mobileNavbarContent = React.useRef<HTMLDivElement>(null);
 	const mobileNavbarList = React.useRef<(HTMLHeadingElement | null)[]>([]);
-	const list = document.querySelectorAll('#navbar-list');
 	const tl = gsap.timeline({ paused: true });
-	function handleToggle(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-		ev.stopPropagation();
+	function handleToggle() {
 		setToggle((prev) => !prev);
 	}
 	React.useLayoutEffect(() => {
+		const list = document.querySelectorAll('#navbar-list');
 		tl.set(mobileNavbarContent.current, {
 			yPercent: -100,
 			backgroundColor: 'black',
@@ -76,9 +75,9 @@ const Navbar = () => {
 			<div
 				id='dekstop__navbar'
 				className='h-10 w-full rounded-md border border-solid border-[#C8C8C8] bg-[#f5f5f5] hidden flex-row items-center gap-2 px-2 capitalize lg:flex shadow-md'>
-				<div className='h-5 w-5 bg-black rounded-full'></div>
+				<div className='h-5 w-5 bg-black rounded-full border border-solid border-[#C8C8C8]'></div>
 				<DesktopNavbarList />
-				<div className='h-5 w-5 bg-black rounded-full'></div>
+				<div className='h-5 w-5 bg-black rounded-full border border-solid border-[#C8C8C8]'></div>
 			</div>
 			<div
 				id='mobile__navbar'
@@ -86,7 +85,7 @@ const Navbar = () => {
 				<h1 className='text-xs font-mono font-bold'>
 					archive//bangli--skatepark
 				</h1>
-				<button onClick={(ev) => handleToggle(ev)}>
+				<button onClick={handleToggle}>
 					<Hamburger
 						toggled={isToggle}
 						size={20}
