@@ -6,10 +6,10 @@ interface Props {
 	children: React.ReactNode;
 }
 const LenisScroll = ({ children }: Props) => {
-	const lenisRef = React.useRef();
+	const lenisRef = React.useRef<any>(null);
 	React.useEffect(() => {
 		function update(time: number) {
-			lenisRef.current?.lenis?.raf(time * 1500);
+			lenisRef.current?.lenis.raf(time * 1500);
 		}
 		gsap.ticker.add(update);
 		return () => {
