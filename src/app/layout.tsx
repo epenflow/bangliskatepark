@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import { ContextProvider } from '@/lib/context/ContextProvider';
 import Trash from '@/components/Section/Gallery/Trash';
 import Error from '@/components/Section/Gallery/Trash';
-import LenisScroll from '@/components/LenisScroll';
+import LenisScroll from '@/lib/context/LenisScroll';
 
 const inter = Inter({ subsets: ['latin'] });
 
