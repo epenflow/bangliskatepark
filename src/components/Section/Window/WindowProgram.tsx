@@ -1,3 +1,4 @@
+import HTMLClientComment from '@/lib/hooks/HTMLClientComment';
 import React from 'react';
 
 const WindowProgram = () => {

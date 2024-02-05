@@ -1,25 +1,25 @@
 'use client';
 import React from 'react';
 type context = {
-	stack: HTMLElement[];
-	stacking: React.JSX.Element[];
-	setStack: React.Dispatch<React.SetStateAction<HTMLElement[]>>;
+	isErrorActive: boolean;
+	handleError: () => void;
 };
 const Context = React.createContext<context>({
-	stack: [],
-	setStack: () => {},
-	stacking: [],
+	isErrorActive: false,
+	handleError: () => {},
 });
 interface Props {
 	children: React.ReactNode;
 }
 export const ContextProvider = ({ children }: Props) => {
-	const [stack, setStack] = React.useState<HTMLElement[]>([]);
-	const stacking: React.JSX.Element[] = [];
+	const [isErrorActive, setErrorActive] = React.useState<boolean>(false);
+	function handleError() {
+		setErrorActive((prev) => !prev);
+	}
+
 	const values = {
-		stack,
-		setStack,
-		stacking,
+		isErrorActive,
+		handleError,
 	};
 	return <Context.Provider value={values}>{children}</Context.Provider>;
 };

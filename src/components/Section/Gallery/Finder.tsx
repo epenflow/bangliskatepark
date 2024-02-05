@@ -3,17 +3,19 @@ import React from 'react';
 import Image from 'next/image';
 import { IF } from '../../Conditional';
 import Marquee from 'react-fast-marquee';
-import Window from './Window';
+import Window from '../Window/Window';
+
 const Finder = ({ index }: { index: number }) => {
 	const [isOpen, setOpen] = React.useState<boolean>(false);
-	const nodeRef = React.useRef<HTMLDivElement>(null);
 	function handleClose() {
 		setOpen((prev) => !prev);
 		console.info('close');
 	}
+
 	return (
 		<React.Fragment>
 			<div
+				id='finder__items'
 				onClick={handleClose}
 				className='flex flex-col capitalize cursor-pointer hover:bg-[#e3e2e2] hover:rounded-md p-1'>
 				<Image

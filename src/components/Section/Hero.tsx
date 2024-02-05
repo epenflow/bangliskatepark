@@ -1,11 +1,11 @@
 'use client';
 import Image from 'next/image';
 import React from 'react';
-import HomeMarquee from './HomeMarquee';
+import HomeMarquee from './Home/HomeMarquee';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Marquee from 'react-fast-marquee';
-import Window from './Gallery/Window';
+import Window from './Window/Window';
 gsap.registerPlugin(ScrollTrigger);
 const Hero = () => {
 	const date = new Date();

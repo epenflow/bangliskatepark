@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
-import Window from './Section/Gallery/Window';
+import Window from './Window';
 import Marquee from 'react-fast-marquee';
-import { IF } from './Conditional';
+import { IF } from '../../Conditional';
 const Live = () => {
 	const [isOpen, setOpen] = React.useState<boolean>(true);
 	function handleClose() {

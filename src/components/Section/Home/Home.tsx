@@ -38,6 +38,7 @@ const Home = () => {
 						toggleClass: '.active__markers_text',
 						toggleActions: 'play paused resume reset',
 						invalidateOnRefresh: true,
+						scrub: 0,
 					},
 				});
 			});

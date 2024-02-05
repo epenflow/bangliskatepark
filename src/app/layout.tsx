@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer';
 import { ContextProvider } from '@/lib/context/ContextProvider';
+import Trash from '@/components/Section/Gallery/Trash';
+import Error from '@/components/Section/Gallery/Trash';
+import LenisScroll from '@/components/LenisScroll';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,9 +26,10 @@ export default function RootLayout({
 				suppressHydrationWarning={true}
 				className={`${inter.className}`}>
 				<ContextProvider>
-					<Navbar />
-					{children}
-					<Footer />
+					<Error>
+						<Navbar />
+						<LenisScroll>{children}</LenisScroll>
+					</Error>
 				</ContextProvider>
 			</body>
 		</html>
