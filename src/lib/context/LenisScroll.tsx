@@ -14,6 +14,8 @@ const LenisScroll = ({ children }: Props) => {
 				duration: 5000,
 				smoothTouch: true,
 				syncTouch: true,
+				syncTouchLerp: 0.1,
+				autoResize: true,
 			}}>
 			{children}
 		</ReactLenis>

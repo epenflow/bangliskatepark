@@ -19,15 +19,47 @@ const Home = () => {
 		end: 'bottom top',
 		invalidateOnRefresh: true,
 	};
+	const sectionTwoTrigger = {
+		trigger: '#home__section-two',
+		pin: true,
+		scrub: true,
+		start: 'top+=25% top',
+		end: 'bottom+=25% top',
+		invalidateOnRefresh: true,
+		markers: true,
+	};
 	React.useLayoutEffect(() => {
 		const tl = gsap.timeline();
 		const markersText = gsap.utils.toArray('.markers__text');
-
+		const homeText = gsap.utils.toArray('#home__section-text');
 		const ctx = gsap.context(() => {
 			tl.to('#home__section-one', {
 				scrollTrigger: sectionOneTrigger,
 				duration: 0.5,
 				clipPath: 'circle(0% at 50% 50%)',
+			});
+			homeText.forEach((text, index) => {
+				tl.to(
+					'#home__section-text',
+					{
+						clipPath:
+							'polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)',
+						stagger: 1.5,
+						duration: 2.5,
+						scrollTrigger: {
+							trigger: text as HTMLParagraphElement,
+							pin: true,
+							scrub: 0.2,
+							start: 'top+=15% top',
+							end: 'bottom+=50% top',
+							invalidateOnRefresh: true,
+							markers: true,
+							pinSpacing: false,
+							pinType: 'fixed',
+						},
+					},
+					index + 2
+				);
 			});
 			markersText.forEach((text, index) => {
 				gsap.to(text as HTMLSpanElement, {
@@ -51,7 +83,7 @@ const Home = () => {
 			className='w-screen lg:max-h-screen lg:h-screen flex flex-col lg:flex-row border-y border-solid border-black z-10 bg-black'>
 			<div
 				id='home__section-one'
-				className='flex items-center justify-center h-full flex-col w-full lg:w-1/2 relative overflow-hidden lg:border-none gap-2 circle__clip-path bg-[#00ff00]'>
+				className='flex items-center justify-center h-screen lg:h-full flex-col w-full lg:w-1/2 relative overflow-hidden lg:border-none gap-2 circle__clip-path bg-[#00ff00]'>
 				<h1 className='text-center text-4xl lg:text-8xl uppercase mt-14 lg:mt-0'>
 					Bupati Cup Skateboard Competition
 					<br />
@@ -74,12 +106,14 @@ const Home = () => {
 			</div>
 			<div
 				id='home__section-two'
-				className='flex flex-col h-full w-full lg:w-1/2 items-center justify-center border-t border-l border-solid border-black gap-2 box-border overflow-hidden relative bg-[#f2f2f2]'>
+				className='flex flex-col h-full w-full lg:w-1/2 items-center justify-center border-t border-l border-solid border-black gap-2 box-border overflow-hidden relative bg-[#f2f2f2] '>
 				<h1 className='text-center text-4xl uppercase mt-5 markers__text'>
 					background
 				</h1>
 				<span className='lg:mx-16 mx-5 mb-10'>
-					<p className='text-justify m-1 indent-5'>
+					<p
+						id='home__section-text'
+						className='text-justify m-1 indent-5 square__clip-path'>
 						We are part of the PSB (Persatuan Skateboarders Bali),
 						an official organization that accommodates the
 						skateboard community in the Bangli area (PSB Bangli)
@@ -97,7 +131,9 @@ const Home = () => {
 							sports.
 						</span>
 					</p>
-					<p className='text-justify m-1 indent-5'>
+					<p
+						id='home__section-text'
+						className='text-justify m-1 indent-5 square__clip-path bg-[#f2f2f2]'>
 						<span className='markers__text'>
 							With the success of the Bupati Cup Competition I
 							event last year, we want to continue this positive

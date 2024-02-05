@@ -84,8 +84,30 @@
 		scrollbar-width: none;
 	}
 }
+html.lenis {
+	height: auto;
+}
+
+.lenis.lenis-smooth {
+	scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+	overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+	overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+	pointer-events: none;
+}
 .circle__clip-path {
 	clip-path: circle(100% at 50% 50%);
+}
+.square__clip-path {
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }
 .markers__text {
 	background-image: linear-gradient(#00ff00, #00ff00);
