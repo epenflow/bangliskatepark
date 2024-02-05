@@ -42,8 +42,6 @@ const Home = () => {
 				tl.to(
 					'#home__section-text',
 					{
-						clipPath:
-							'polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)',
 						stagger: 1.5,
 						duration: 2.5,
 						scrollTrigger: {
@@ -53,7 +51,6 @@ const Home = () => {
 							start: 'top+=15% top',
 							end: 'bottom+=50% top',
 							invalidateOnRefresh: true,
-							markers: true,
 							pinSpacing: false,
 							pinType: 'fixed',
 						},

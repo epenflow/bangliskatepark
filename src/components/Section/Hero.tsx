@@ -52,9 +52,9 @@ const Hero = () => {
 			<h1
 				id='hero__text'
 				className='text-center lg:text-8xl text-4xl py-4 uppercase font-mono flex items-center w-full justify-center h-full'>
-				&lt;--!Bangli
+				Bangli
 				<span className='lg:h-14 lg:w-14 h-5 w-5 rounded-full bg-black block' />
-				Skatepark--&gt;
+				Skatepark
 			</h1>
 		</section>
 	);
