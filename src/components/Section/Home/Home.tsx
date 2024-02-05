@@ -64,6 +64,7 @@ const Home = () => {
 					scrollTrigger: {
 						trigger: text as HTMLSpanElement,
 						start: 'top center-=2%',
+						end: 'top center-=2%',
 						toggleClass: '.active__markers_text',
 						toggleActions: 'play paused resume reset',
 						invalidateOnRefresh: true,
