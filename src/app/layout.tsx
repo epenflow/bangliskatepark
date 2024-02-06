@@ -26,9 +26,10 @@ export default function RootLayout({
 				suppressHydrationWarning={true}
 				className={`${inter.className}`}>
 				<ContextProvider>
+					<LenisScroll />
 					<Error>
 						<Navbar />
-						<LenisScroll>{children}</LenisScroll>
+						{children}
 					</Error>
 				</ContextProvider>
 			</body>

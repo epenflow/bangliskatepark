@@ -180,7 +180,7 @@
     nanoevents "^9.0.0"
     zustand "^4.4.7"
 
-"@studio-freight/lenis@^1.0.33":
+"@studio-freight/lenis@^1.0.33", "@studio-freight/lenis@^1.0.34":
   version "1.0.34"
   resolved "https://registry.yarnpkg.com/@studio-freight/lenis/-/lenis-1.0.34.tgz#1078ee81aa8a2a1ab9f332d60d9148b8909b53af"
   integrity sha512-sEyzEjfAsTlFgDebMYT5G7tlB0ZHhWkHEoJj0g7W0YYZO093Mh4MU65o1qbNKwRacspdU04ZrA+5Wxwt4dsS7Q==

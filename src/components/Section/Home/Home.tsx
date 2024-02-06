@@ -35,7 +35,7 @@ const Home = () => {
 		const ctx = gsap.context(() => {
 			tl.to('#home__section-one', {
 				scrollTrigger: sectionOneTrigger,
-				duration: 0.5,
+				duration: 2.5,
 				clipPath: 'circle(0% at 50% 50%)',
 			});
 			homeText.forEach((text, index) => {
